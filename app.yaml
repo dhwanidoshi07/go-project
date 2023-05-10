@@ -2,3 +2,8 @@ runtime: go
 env: flex
 manual_scaling:
     instances: 1
+    
+prebuild:
+  commands:
+    - apt-get update
+    - apt-get install -y build-essential
