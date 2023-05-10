@@ -1,9 +1,21 @@
-runtime: go
-env: flex
-manual_scaling:
-    instances: 1
-    
-prebuild:
-  commands:
-    - apt-get update
-    - apt-get install -y build-essential
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: go-project-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: go-project
+  template:
+    metadata:
+      labels:
+        app: go-project
+    spec:
+      containers:
+        - name: go-project-container
+          image: gcr.io/genuine-citron-386306/go-bookstore-image:latest
+          ports:
+            - containerPort: 8080
+
